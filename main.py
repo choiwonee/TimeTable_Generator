@@ -452,10 +452,11 @@ class MainWindow(QMainWindow):
                     return
 
         # ── 같은 그룹에 학점이 다른 과목이 이미 있는 경우 경고 ──
-        if same_group:
-            existing_credits = {c.credits for c in same_group}
+        # (분리수업 두 번째 슬롯은 학점이 0으로 정규화되므로 검사 제외)
+        if same_group and not is_linked:
+            existing_credits = {c.credits for c in same_group if not c.is_linked}
             new_credit = self.credit_input.value()
-            if new_credit not in existing_credits and category != "PNP":
+            if existing_credits and new_credit not in existing_credits and category != "PNP":
                 existing_str = ", ".join(str(v) for v in sorted(existing_credits))
                 reply = QMessageBox.question(
                     self, "그룹 학점 불일치",
@@ -468,11 +469,19 @@ class MainWindow(QMainWindow):
                 if reply == QMessageBox.No:
                     return
 
+        # ── 분리수업 학점 정규화 ──
+        # 같은 그룹에 linked 슬롯이 이미 있으면 이 슬롯은 credits=0 (중복 계산 방지)
+        # 학점은 그룹에서 가장 먼저 추가된 슬롯 하나만 보유
+        has_primary_linked = is_linked and any(
+            c.is_linked and c.credits > 0 for c in same_group
+        )
+        effective_credits = 0 if has_primary_linked else self.credit_input.value()
+
         # 같은 그룹이면 색상 공유
         group_color = self._find_group_color(name)
         course = Course(
             name, day, start, end,
-            self.credit_input.value(), category,
+            effective_credits, category,
             color=group_color,
             section_name=section_name,
             is_linked=is_linked,
@@ -715,22 +724,12 @@ class MainWindow(QMainWindow):
             tab.set_period_times(self.period_times)
             tab.load_schedule(schedule)
 
-            # 학점은 그룹(name)당 1회만 합산 — 분리수업 Course 객체 중복 방지
-            seen_names: set = set()
-            major = ge = other = pnp_n = 0
-            for c in schedule:
-                if c.category == "PNP":
-                    pnp_n += 1
-                    continue
-                if c.name not in seen_names:
-                    seen_names.add(c.name)
-                    if c.category == "전공":
-                        major += c.credits
-                    elif c.category == "교양":
-                        ge += c.credits
-                    else:
-                        other += c.credits
-            total = major + ge + other
+            # credits가 데이터 모델 수준에서 정규화되어 있으므로 단순 합산
+            major  = sum(c.credits for c in schedule if c.category == "전공")
+            ge     = sum(c.credits for c in schedule if c.category == "교양")
+            other  = sum(c.credits for c in schedule if c.category == "기타")
+            pnp_n  = sum(1 for c in schedule if c.category == "PNP")
+            total  = major + ge + other
 
             summary = (
                 f"총 {total}학점  |  전공: {major}  교양: {ge}  기타: {other}"
@@ -780,10 +779,23 @@ class MainWindow(QMainWindow):
             try:
                 with open(path, "r", encoding="utf-8") as f:
                     self.courses = [Course.from_dict(d) for d in json.load(f)]
+                self._normalize_linked_credits()
                 self.update_course_list()
                 QMessageBox.information(self, "성공", "불러왔습니다.")
             except Exception as e:
                 QMessageBox.critical(self, "실패", str(e))
+
+    def _normalize_linked_credits(self):
+        """불러온 데이터의 분리수업 슬롯 학점을 정규화합니다.
+        같은 그룹(name)의 linked 슬롯 중 첫 번째만 학점을 갖고, 나머지는 0으로 설정합니다."""
+        seen_linked: set = set()
+        for c in self.courses:
+            if not c.is_linked:
+                continue
+            if c.name in seen_linked:
+                c.credits = 0
+            else:
+                seen_linked.add(c.name)
 
 
 if __name__ == "__main__":

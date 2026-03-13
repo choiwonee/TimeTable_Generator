@@ -64,7 +64,8 @@ class ScheduleGenerator:
         # 각 그룹 → 옵션 목록 변환
         group_options: list = []
         for group_name, courses in groups.items():
-            credits = courses[0].credits
+            # 분리수업 정규화 후 0이 저장된 슬롯이 있을 수 있으므로 max 사용
+            credits = max(c.credits for c in courses)
             linked = tuple(c for c in courses if c.is_linked)
             non_linked = [c for c in courses if not c.is_linked]
             options = []
