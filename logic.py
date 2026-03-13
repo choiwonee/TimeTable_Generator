@@ -57,9 +57,12 @@ class ScheduleGenerator:
         opt_normal = [c for c in optional if c.category != "PNP"]
 
         # 그룹 구성 (입력 순서 유지)
+        # 고정 과목이 이미 속한 그룹은 optional 풀에서 제외
+        fixed_group_names = {c.name for c in fixed}
         groups: OrderedDict = OrderedDict()
         for c in opt_normal:
-            groups.setdefault(c.name, []).append(c)
+            if c.name not in fixed_group_names:
+                groups.setdefault(c.name, []).append(c)
 
         # 각 그룹 → 옵션 목록 변환
         group_options: list = []
@@ -131,12 +134,13 @@ class ScheduleGenerator:
     def find_credit_mismatches(courses: list) -> list:
         """
         같은 그룹(name) 안에서 학점 값이 2가지 이상인 경우를 반환합니다.
+        credits=0 인 슬롯은 분리수업 정규화 결과이므로 검사에서 제외합니다.
         반환: [(그룹명, frozenset({학점값, ...})), ...]  — 빈 리스트 = 문제 없음
         """
         from collections import defaultdict
         group_credits: dict = defaultdict(set)
         for c in courses:
-            if c.category != "PNP":
+            if c.category != "PNP" and c.credits > 0:   # credits=0 정규화 슬롯 제외
                 group_credits[c.name].add(c.credits)
         return [
             (name, credits)
@@ -146,24 +150,28 @@ class ScheduleGenerator:
 
     @staticmethod
     def _count_credits_by_group(courses: list) -> int:
-        seen: set = set()
-        total = 0
+        # 분리수업 정규화로 같은 그룹 내 credits=0 슬롯이 먼저 등장할 수 있으므로
+        # 첫 번째 슬롯이 아닌 그룹 내 최댓값을 사용한다.
+        group_credits: dict = {}
         for c in courses:
-            if c.name not in seen:
-                total += c.credits
-                seen.add(c.name)
-        return total
+            if c.credits > 0:
+                group_credits[c.name] = max(group_credits.get(c.name, 0), c.credits)
+        return sum(group_credits.values())
 
     def _append_with_pnp(self, base, occupied, pnp_courses, results):
         schedule = list(base)
         occ = set(occupied)
+        included_pnp_groups: set = set()   # 그룹당 1개만 포함
         for p in pnp_courses:
+            if p.name in included_pnp_groups:
+                continue
             if p.day in self.empty_days:
                 continue
             slots = set((p.day, period) for period in p.get_periods())
             if not (slots & occ):
                 schedule.append(p)
                 occ.update(slots)
+                included_pnp_groups.add(p.name)
         if self.check_max_gap(schedule):
             results.append(schedule)
 
