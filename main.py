@@ -724,9 +724,9 @@ class MainWindow(QMainWindow):
             tab.set_period_times(self.period_times)
             tab.load_schedule(schedule)
 
-            major  = sum(c.credits for c in schedule if c.category == "전공")
-            ge     = sum(c.credits for c in schedule if c.category == "교양")
-            other  = sum(c.credits for c in schedule if c.category == "기타")
+            major  = ScheduleGenerator._count_credits_by_group([c for c in schedule if c.category == "전공"])
+            ge     = ScheduleGenerator._count_credits_by_group([c for c in schedule if c.category == "교양"])
+            other  = ScheduleGenerator._count_credits_by_group([c for c in schedule if c.category == "기타"])
             pnp_n  = sum(1 for c in schedule if c.category == "PNP")
             total  = major + ge + other
 

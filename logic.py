@@ -164,20 +164,30 @@ class ScheduleGenerator:
             return
         schedule = list(base)
         occ = set(occupied)
-        included_pnp_groups: set = set()   # 그룹당 1개만 포함
+        included_pnp_groups: set = set()   # 그룹당 1회만 포함
+
+        # 이름별로 슬롯을 묶어서 처리 (분리수업 PNP 대응)
+        from collections import defaultdict
+        pnp_groups = defaultdict(list)
         for p in pnp_courses:
-            if p.name in included_pnp_groups:
+            pnp_groups[p.name].append(p)
+
+        for group_name, slots in pnp_groups.items():
+            if group_name in included_pnp_groups:
                 continue
-            if p.day in self.empty_days:
+            if any(s.day in self.empty_days for s in slots):
                 continue
-            slots = set((p.day, period) for period in p.get_periods())
-            if slots & occ:
+            new_slots = set(
+                (s.day, period) for s in slots for period in s.get_periods()
+            )
+            if new_slots & occ:
                 continue
-            # PNP 추가 후에도 max_gap 조건이 유지될 때만 포함
-            if self.check_max_gap(schedule + [p]):
-                schedule.append(p)
-                occ.update(slots)
-                included_pnp_groups.add(p.name)
+            # PNP 세트 추가 후에도 max_gap 조건이 유지될 때만 포함
+            if self.check_max_gap(schedule + slots):
+                schedule.extend(slots)
+                occ.update(new_slots)
+                included_pnp_groups.add(group_name)
+
         results.append(schedule)
 
     def has_conflict(self, courses: list) -> bool:
