@@ -727,7 +727,7 @@ class MainWindow(QMainWindow):
             major  = ScheduleGenerator._count_credits_by_group([c for c in schedule if c.category == "전공"])
             ge     = ScheduleGenerator._count_credits_by_group([c for c in schedule if c.category == "교양"])
             other  = ScheduleGenerator._count_credits_by_group([c for c in schedule if c.category == "기타"])
-            pnp_n  = sum(1 for c in schedule if c.category == "PNP")
+            pnp_n  = len({c.name for c in schedule if c.category == "PNP"})
             total  = major + ge + other
 
             summary = (
