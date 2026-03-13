@@ -159,6 +159,9 @@ class ScheduleGenerator:
         return sum(group_credits.values())
 
     def _append_with_pnp(self, base, occupied, pnp_courses, results):
+        # base schedule 자체가 max_gap 조건을 만족하지 않으면 바로 제외
+        if not self.check_max_gap(base):
+            return
         schedule = list(base)
         occ = set(occupied)
         included_pnp_groups: set = set()   # 그룹당 1개만 포함
@@ -168,12 +171,14 @@ class ScheduleGenerator:
             if p.day in self.empty_days:
                 continue
             slots = set((p.day, period) for period in p.get_periods())
-            if not (slots & occ):
+            if slots & occ:
+                continue
+            # PNP 추가 후에도 max_gap 조건이 유지될 때만 포함
+            if self.check_max_gap(schedule + [p]):
                 schedule.append(p)
                 occ.update(slots)
                 included_pnp_groups.add(p.name)
-        if self.check_max_gap(schedule):
-            results.append(schedule)
+        results.append(schedule)
 
     def has_conflict(self, courses: list) -> bool:
         occupied: set = set()

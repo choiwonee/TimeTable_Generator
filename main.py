@@ -590,15 +590,16 @@ class MainWindow(QMainWindow):
                 )
                 return
 
-        # 이름이 바뀐 경우 그룹 학점 불일치 재검사
+        # 이름이나 학점이 바뀐 경우 그룹 학점 불일치 재검사
         if new_name != course.name or new_credit != course.credits:
             same_group = [
                 c for c in self.courses
                 if c is not course and c.name == new_name and new_category != "PNP"
             ]
             if same_group:
-                existing_credits = {c.credits for c in same_group}
-                if new_credit not in existing_credits:
+                # credits=0 정규화 슬롯은 불일치 검사에서 제외
+                existing_credits = {c.credits for c in same_group if c.credits > 0}
+                if existing_credits and new_credit not in existing_credits:
                     existing_str = ", ".join(str(v) for v in sorted(existing_credits))
                     reply = QMessageBox.question(
                         self, "그룹 학점 불일치",
@@ -672,7 +673,6 @@ class MainWindow(QMainWindow):
         self.progress_dialog.close()
 
         if status == "credit_mismatch":
-            # results에 [(그룹명, {학점값...}), ...] 형태로 불일치 정보가 담겨 있음
             lines = []
             for group_name, credit_set in results:
                 credits_str = ", ".join(str(v) for v in sorted(credit_set))
@@ -724,7 +724,6 @@ class MainWindow(QMainWindow):
             tab.set_period_times(self.period_times)
             tab.load_schedule(schedule)
 
-            # credits가 데이터 모델 수준에서 정규화되어 있으므로 단순 합산
             major  = sum(c.credits for c in schedule if c.category == "전공")
             ge     = sum(c.credits for c in schedule if c.category == "교양")
             other  = sum(c.credits for c in schedule if c.category == "기타")
