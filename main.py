@@ -7,13 +7,13 @@ from PySide6.QtWidgets import (
     QLabel, QLineEdit, QComboBox, QSpinBox, QPushButton,
     QTableWidget, QTableWidgetItem, QHeaderView, QTabWidget,
     QCheckBox, QMessageBox, QSplitter, QGroupBox, QFileDialog,
-    QProgressDialog, QDialog,
+    QProgressDialog, QDialog, QScrollArea,
 )
 from PySide6.QtCore import Qt, QThread, Signal
-from PySide6.QtGui import QColor
+from PySide6.QtGui import QColor, QFont, QPalette
 
 from constants import DAYS, DEFAULT_PERIOD_TIMES
-from models import Course
+from models import Course, PALETTES, DEFAULT_PALETTE, set_palette
 from logic import ScheduleGenerator
 from ui_widgets import TimeTableWidget
 
@@ -23,7 +23,7 @@ from ui_widgets import TimeTableWidget
 # ══════════════════════════════════════════════
 
 class ScheduleWorker(QThread):
-    finished = Signal(str, list)   # (status, results)
+    finished = Signal(str, list)
     error = Signal(str)
 
     def __init__(self, courses, target_credit, empty_days, max_gap):
@@ -47,12 +47,181 @@ class ScheduleWorker(QThread):
 
 
 # ══════════════════════════════════════════════
+#  도움말 다이얼로그
+# ══════════════════════════════════════════════
+
+class HelpDialog(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("사용 방법")
+        self.setMinimumWidth(500)
+        self.setMinimumHeight(600)
+        self.setModal(True)
+
+        # 다크/라이트 모드 감지
+        base_color = self.palette().color(QPalette.Base)
+        is_dark = base_color.lightness() < 128
+
+        # 팔레트 기반 색상
+        if is_dark:
+            body_bg      = "rgba(255,255,255,0.06)"
+            body_text    = "#d0d0d0"
+            divider      = "rgba(255,255,255,0.12)"
+        else:
+            body_bg      = "#f8f8f8"
+            body_text    = "#333333"
+            divider      = "#e0e0e0"
+
+        outer = QVBoxLayout(self)
+        outer.setContentsMargins(0, 0, 0, 12)
+        outer.setSpacing(0)
+
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setFrameShape(QScrollArea.NoFrame)
+
+        content = QWidget()
+        cl = QVBoxLayout(content)
+        cl.setContentsMargins(24, 20, 24, 8)
+        cl.setSpacing(0)
+
+        sections = [
+            {
+                "step": "Step 1",
+                "title": "과목 입력",
+                "body": (
+                    "① 구분 선택: 전공 / 교양 / 기타 / PNP\n"
+                    "② 강의명 입력  (같은 이름 = 같은 과목으로 인식)\n"
+                    "③ 요일 / 시작·종료 교시 / 학점 입력\n"
+                    "④ [추가] 버튼 또는 Enter"
+                ),
+            },
+            {
+                "step": "Step 2",
+                "title": "분반 vs 분리수업",
+                "body": (
+                    "📌  분반  (분리수업 미체크)\n"
+                    "같은 강의명으로 여러 시간대를 입력하면\n"
+                    "시간표 생성 시 그 중 하나만 자동으로 선택됩니다.\n\n"
+                    "    예)  영어회화   화 3-4교시\n"
+                    "         영어회화   목 3-4교시\n"
+                    "    → 둘 중 하나가 편성됨\n\n"
+                    "🔗  분리수업  (분리수업 체크)\n"
+                    "같은 강의명의 항목들이 항상 세트로 함께 편성됩니다.\n"
+                    "주 2회처럼 여러 시간대가 묶이는 수업에 사용하세요.\n\n"
+                    "    예)  대학수학   월 1-2교시  ← 분리수업 체크\n"
+                    "         대학수학   목 1-2교시  ← 분리수업 체크\n"
+                    "    → 두 시간대가 반드시 함께 편성됨"
+                ),
+            },
+            {
+                "step": "Step 3",
+                "title": "고정 / PNP",
+                "body": (
+                    "📌  고정 체크\n"
+                    "모든 시간표에 반드시 포함됩니다.\n"
+                    "이미 수강 신청한 과목이나 필수 과목에 사용하세요.\n\n"
+                    "📌  PNP\n"
+                    "학점 목표에 포함되지 않으며,\n"
+                    "시간 충돌이 없으면 자동으로 편성됩니다."
+                ),
+            },
+            {
+                "step": "Step 4",
+                "title": "생성 조건 설정",
+                "body": (
+                    "• 목표 학점:  완성된 시간표의 총 학점  (PNP 제외)\n"
+                    "• 최대 공강:  같은 날 수업 사이 허용할 최대 빈 교시 수\n"
+                    "• 공강 요일:  수업을 아예 넣지 않을 요일\n\n"
+                    "설정 후 [시간표 생성] 버튼을 누르세요.\n"
+                    "조건에 맞는 조합이 최대 50개 탭으로 표시됩니다."
+                ),
+            },
+            {
+                "step": "Step 5",
+                "title": "결과 저장",
+                "body": (
+                    "• 이미지로 저장:  원하는 시간표 탭에서 버튼을 눌러 PNG / JPG로 내보내기\n"
+                    "• 강의 목록 저장:  입력한 과목 목록을 JSON 파일로 저장\n"
+                    "• 강의 목록 불러오기:  저장해 둔 JSON 파일을 불러와 목록 복원\n"
+                    "• 교시 시간 설정:  학교별 교시 시작 시간을 직접 입력 가능"
+                ),
+            },
+        ]
+
+        for i, sec in enumerate(sections):
+            if i > 0:
+                line = QWidget()
+                line.setFixedHeight(1)
+                line.setStyleSheet(f"background-color: {divider};")
+                cl.addWidget(line)
+                cl.addSpacing(16)
+
+            # Step 배지 + 제목
+            header_w = QWidget()
+            header_layout = QHBoxLayout(header_w)
+            header_layout.setContentsMargins(0, 0, 0, 0)
+            header_layout.setSpacing(8)
+
+            badge = QLabel(sec["step"])
+            badge.setFixedHeight(22)
+            badge.setStyleSheet(
+                "background-color: #4a6fa5; color: white;"
+                "font-size: 11px; font-weight: bold;"
+                "border-radius: 4px; padding: 0 8px;"
+            )
+            badge.setAlignment(Qt.AlignCenter)
+
+            title_lbl = QLabel(sec["title"])
+            f = QFont()
+            f.setPointSize(11)
+            f.setBold(True)
+            title_lbl.setFont(f)
+
+            header_layout.addWidget(badge)
+            header_layout.addWidget(title_lbl)
+            header_layout.addStretch()
+            cl.addWidget(header_w)
+            cl.addSpacing(8)
+
+            # 본문
+            body_lbl = QLabel(sec["body"])
+            body_lbl.setWordWrap(True)
+            body_lbl.setStyleSheet(
+                f"font-size: 12px; color: {body_text};"
+                f"background-color: {body_bg}; border-radius: 6px; padding: 12px 16px;"
+            )
+            body_lbl.setTextInteractionFlags(Qt.TextSelectableByMouse)
+            cl.addWidget(body_lbl)
+            cl.addSpacing(16)
+
+        cl.addStretch()
+        scroll.setWidget(content)
+        outer.addWidget(scroll)
+
+        # 닫기 버튼
+        close_btn = QPushButton("닫기")
+        close_btn.setFixedHeight(34)
+        close_btn.setFixedWidth(100)
+        close_btn.setStyleSheet(
+            "QPushButton { background-color: #4a6fa5; color: white;"
+            "border-radius: 4px; font-size: 13px; }"
+            "QPushButton:hover { background-color: #375a8c; }"
+        )
+        close_btn.clicked.connect(self.accept)
+
+        btn_row = QHBoxLayout()
+        btn_row.setContentsMargins(24, 0, 24, 0)
+        btn_row.addStretch()
+        btn_row.addWidget(close_btn)
+        outer.addLayout(btn_row)
+
+
+# ══════════════════════════════════════════════
 #  교시 시간 설정 다이얼로그
 # ══════════════════════════════════════════════
 
 class PeriodSettingsDialog(QDialog):
-    """학교마다 다른 교시 시작 시간을 직접 설정하는 창"""
-
     def __init__(self, period_times: dict, parent=None):
         super().__init__(parent)
         self.setWindowTitle("교시 시간 설정")
@@ -113,8 +282,6 @@ class PeriodSettingsDialog(QDialog):
 # ══════════════════════════════════════════════
 
 class EditCourseDialog(QDialog):
-    """기존 과목의 모든 속성을 수정하는 다이얼로그"""
-
     def __init__(self, course: "Course", parent=None):
         super().__init__(parent)
         self.setWindowTitle("과목 편집")
@@ -217,6 +384,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("TimeTable Manager")
         self.resize(1100, 750)
         self.courses: list[Course] = []
+        self.schedules: list[list] = []   # 생성된 시간표 저장 (팔레트 변경 시 재사용)
         self.period_times: dict = dict(DEFAULT_PERIOD_TIMES)
         self.setup_ui()
 
@@ -229,14 +397,20 @@ class MainWindow(QMainWindow):
         top_bar = QHBoxLayout()
         save_btn = QPushButton("강의 목록 저장")
         load_btn = QPushButton("강의 목록 불러오기")
-        settings_btn = QPushButton("⚙  교시 시간 설정")
+        help_btn = QPushButton("?  사용 방법")
+        help_btn.setStyleSheet(
+            "QPushButton { background-color: #4a6fa5; color: white;"
+            "border-radius: 4px; font-weight: bold; padding: 0 12px; }"
+            "QPushButton:hover { background-color: #375a8c; }"
+        )
+
         save_btn.clicked.connect(self.save_data)
         load_btn.clicked.connect(self.load_data)
-        settings_btn.clicked.connect(self.open_settings)
+        help_btn.clicked.connect(self.open_help)
         top_bar.addWidget(save_btn)
         top_bar.addWidget(load_btn)
-        top_bar.addWidget(settings_btn)
         top_bar.addStretch()
+        top_bar.addWidget(help_btn)
         main_layout.addLayout(top_bar)
 
         splitter = QSplitter(Qt.Horizontal)
@@ -249,7 +423,6 @@ class MainWindow(QMainWindow):
         input_group = QGroupBox("1. 강의 입력")
         input_layout = QVBoxLayout()
 
-        # 행1: 구분 / 강의명(그룹명) / 분반
         row1 = QHBoxLayout()
         self.category_input = QComboBox()
         self.category_input.addItems(["전공", "교양", "기타", "PNP"])
@@ -268,7 +441,6 @@ class MainWindow(QMainWindow):
         row1.addWidget(self.section_input)
         input_layout.addLayout(row1)
 
-        # 행2: 요일 / 시작 / 종료 / 학점 / 분리수업
         row2 = QHBoxLayout()
         self.day_input = QComboBox()
         self.day_input.addItems(DAYS)
@@ -306,17 +478,26 @@ class MainWindow(QMainWindow):
         row2.addWidget(self.linked_check)
         input_layout.addLayout(row2)
 
-        # 카테고리 변경 시 PNP 힌트 토글
         self.category_input.currentTextChanged.connect(self._on_category_changed)
 
-        # 안내 문구
+        # ── 간소화된 안내 문구 (다크/라이트 자동 대응) ──
         hint = QLabel(
-            "💡 같은 강의명 = 같은 그룹.\n"
-            "  분반: 이름 동일 + 분리수업 미체크 → 시간표 생성 시 하나만 선택됩니다.\n"
-            "  분리수업: 이름 동일 + 분리수업 체크 → 전체 세트가 함께 선택됩니다."
+            "💡 같은 강의명 = 시간표 생성 시 하나만 선택   "
+            "🔗 분리수업 체크 = 같은 강의명끼리 세트로 묶어서 편성"
         )
         hint.setWordWrap(True)
-        hint.setStyleSheet("color: #555; font-size: 11px; padding: 2px 0;")
+        _base = hint.palette().color(QPalette.Base)
+        _is_dark = _base.lightness() < 128
+        if _is_dark:
+            _hint_bg   = "rgba(255,255,255,0.06)"
+            _hint_text = "#a0a0a0"
+        else:
+            _hint_bg   = "#f5f5f5"
+            _hint_text = "#555555"
+        hint.setStyleSheet(
+            f"color: {_hint_text}; font-size: 11px; padding: 5px 8px;"
+            f"background-color: {_hint_bg}; border-radius: 4px;"
+        )
         input_layout.addWidget(hint)
 
         add_btn = QPushButton("추가")
@@ -328,7 +509,6 @@ class MainWindow(QMainWindow):
         left_layout.addWidget(input_group)
 
         # 2. 강의 목록
-        # 컬럼: 구분 | 강의명[분반] | 시간 | 학점 | 분리 | 고정 | 관리
         list_group = QGroupBox("2. 강의 목록  (더블클릭으로 편집 | 체크박스로 고정/분리 변경)")
         list_layout = QVBoxLayout()
         self.course_list_table = QTableWidget(0, 7)
@@ -385,25 +565,102 @@ class MainWindow(QMainWindow):
         cond_group.setLayout(cond_layout)
         left_layout.addWidget(cond_group)
 
+        # ── 우측 패널 (컨트롤 바 + 결과 탭) ──
+        right_panel = QWidget()
+        right_layout = QVBoxLayout(right_panel)
+        right_layout.setContentsMargins(0, 0, 0, 0)
+        right_layout.setSpacing(6)
+
+        # 컨트롤 바 (교시 시간 설정 + 팔레트 선택)
+        ctrl_bar = QHBoxLayout()
+        ctrl_bar.setSpacing(8)
+
+        settings_btn = QPushButton("⚙  교시 시간 설정")
+        settings_btn.clicked.connect(self.open_settings)
+
+        palette_label = QLabel("팔레트:")
+        palette_label.setStyleSheet("font-size: 12px;")
+        self.palette_combo = QComboBox()
+        self.palette_combo.addItems(list(PALETTES.keys()))
+        self.palette_combo.setCurrentText(DEFAULT_PALETTE)
+        self.palette_combo.setFixedWidth(185)
+        self.palette_combo.setToolTip("과목 추가 시 사용할 색상 팔레트를 선택합니다.")
+        self.palette_combo.currentTextChanged.connect(self._on_palette_changed)
+
+        ctrl_bar.addWidget(settings_btn)
+        ctrl_bar.addStretch()
+        ctrl_bar.addWidget(palette_label)
+        ctrl_bar.addWidget(self.palette_combo)
+        right_layout.addLayout(ctrl_bar)
+
         self.result_tabs = QTabWidget()
+        right_layout.addWidget(self.result_tabs)
+
         splitter.addWidget(left_panel)
-        splitter.addWidget(self.result_tabs)
+        splitter.addWidget(right_panel)
         splitter.setSizes([460, 640])
         main_layout.addWidget(splitter)
+
+    # ══════════════════════════════════════════
+    #  팔레트 변경
+    # ══════════════════════════════════════════
+
+    def _on_palette_changed(self, name: str):
+        set_palette(name)
+        self._recolor_courses()
+        self.update_course_list()
+        self._refresh_result_tabs()
+
+    def _recolor_courses(self):
+        """현재 팔레트로 모든 과목 색상을 재배정합니다. 같은 그룹은 같은 색을 공유합니다."""
+        from models import _next_color
+        group_colors: dict = {}
+        for c in self.courses:
+            if c.name not in group_colors:
+                group_colors[c.name] = _next_color()
+            c.color = group_colors[c.name]
+
+    def _refresh_result_tabs(self):
+        """현재 열린 시간표 탭을 새 색상으로 다시 그립니다."""
+        if not self.schedules:
+            return
+        current_idx = self.result_tabs.currentIndex()
+        self.result_tabs.clear()
+        for i, schedule in enumerate(self.schedules):
+            tab = TimeTableWidget()
+            tab.set_period_times(self.period_times)
+            tab.load_schedule(schedule)
+            major = ScheduleGenerator._count_credits_by_group([c for c in schedule if c.category == "전공"])
+            ge    = ScheduleGenerator._count_credits_by_group([c for c in schedule if c.category == "교양"])
+            other = ScheduleGenerator._count_credits_by_group([c for c in schedule if c.category == "기타"])
+            pnp_n = len({c.name for c in schedule if c.category == "PNP"})
+            total = major + ge + other
+            summary = f"총 {total}학점  |  전공: {major}  교양: {ge}  기타: {other}"
+            if pnp_n:
+                summary += f"  |  PNP: {pnp_n}과목"
+            tab.set_summary(summary)
+            self.result_tabs.addTab(tab, f"{i + 1}번")
+        if 0 <= current_idx < self.result_tabs.count():
+            self.result_tabs.setCurrentIndex(current_idx)
+
+    # ══════════════════════════════════════════
+    #  도움말
+    # ══════════════════════════════════════════
+
+    def open_help(self):
+        HelpDialog(self).exec()
 
     # ══════════════════════════════════════════
     #  강의 추가
     # ══════════════════════════════════════════
 
     def _find_group_color(self, name: str) -> str | None:
-        """같은 이름(그룹)의 기존 과목 색상을 반환합니다."""
         for c in self.courses:
             if c.name == name:
                 return c.color
         return None
 
     def _on_category_changed(self, text: str):
-        """카테고리가 PNP로 변경될 때 힌트 레이블을 표시합니다."""
         self.pnp_hint_label.setVisible(text == "PNP")
 
     def add_course(self):
@@ -422,7 +679,6 @@ class MainWindow(QMainWindow):
         section_name = self.section_input.text().strip()
         is_linked = self.linked_check.isChecked()
 
-        # ── 완전 중복 검사 (이름 + 요일 + 시작 + 종료가 모두 같은 경우) ──
         exact_dup = any(
             c.name == name and c.day == day
             and c.start_period == start and c.end_period == end
@@ -436,7 +692,6 @@ class MainWindow(QMainWindow):
             )
             return
 
-        # ── 같은 그룹에 non-linked가 이미 있는데 linked를 추가하려는 경우 경고 ──
         same_group = [c for c in self.courses if c.name == name]
         if same_group and is_linked:
             has_non_linked_in_group = any(not c.is_linked for c in same_group)
@@ -451,8 +706,6 @@ class MainWindow(QMainWindow):
                 if reply == QMessageBox.No:
                     return
 
-        # ── 같은 그룹에 학점이 다른 과목이 이미 있는 경우 경고 ──
-        # (분리수업 두 번째 슬롯은 학점이 0으로 정규화되므로 검사 제외)
         if same_group and not is_linked:
             existing_credits = {c.credits for c in same_group if not c.is_linked}
             new_credit = self.credit_input.value()
@@ -469,15 +722,11 @@ class MainWindow(QMainWindow):
                 if reply == QMessageBox.No:
                     return
 
-        # ── 분리수업 학점 정규화 ──
-        # 같은 그룹에 linked 슬롯이 이미 있으면 이 슬롯은 credits=0 (중복 계산 방지)
-        # 학점은 그룹에서 가장 먼저 추가된 슬롯 하나만 보유
         has_primary_linked = is_linked and any(
             c.is_linked and c.credits > 0 for c in same_group
         )
         effective_credits = 0 if has_primary_linked else self.credit_input.value()
 
-        # 같은 그룹이면 색상 공유
         group_color = self._find_group_color(name)
         course = Course(
             name, day, start, end,
@@ -502,21 +751,17 @@ class MainWindow(QMainWindow):
         for idx, course in enumerate(self.courses):
             self.course_list_table.insertRow(idx)
 
-            # 구분
             self.course_list_table.setItem(idx, 0, QTableWidgetItem(course.category))
 
-            # 강의명 [분반]
             nm = QTableWidgetItem(course.display_name())
             nm.setForeground(QColor(course.color))
             self.course_list_table.setItem(idx, 1, nm)
 
-            # 시간
             self.course_list_table.setItem(
                 idx, 2,
                 QTableWidgetItem(f"{course.day} {course.start_period}-{course.end_period}교시"),
             )
 
-            # 학점
             credit_text = f"{course.credits} (미산정)" if course.category == "PNP" else str(course.credits)
             credit_item = QTableWidgetItem(credit_text)
             credit_item.setTextAlignment(Qt.AlignCenter)
@@ -524,21 +769,18 @@ class MainWindow(QMainWindow):
                 credit_item.setForeground(QColor("#b07800"))
             self.course_list_table.setItem(idx, 3, credit_item)
 
-            # 분리수업 체크박스 (읽기 전용 표시)
             linked_w = self._make_centered_checkbox(
                 course.is_linked,
                 lambda s, c=course: setattr(c, "is_linked", s == 2),
             )
             self.course_list_table.setCellWidget(idx, 4, linked_w)
 
-            # 고정 체크박스
             fixed_w = self._make_centered_checkbox(
                 course.is_fixed,
                 lambda s, c=course: setattr(c, "is_fixed", s == 2),
             )
             self.course_list_table.setCellWidget(idx, 5, fixed_w)
 
-            # 삭제 버튼
             btn = QPushButton("삭제")
             btn.setFixedHeight(26)
             btn.clicked.connect(lambda _, c=course: self.delete_course(c))
@@ -557,7 +799,6 @@ class MainWindow(QMainWindow):
         return w
 
     def edit_course_at_row(self, row: int, _col: int):
-        """테이블 행 더블클릭 시 과목 편집 다이얼로그를 엽니다."""
         if row < 0 or row >= len(self.courses):
             return
         course = self.courses[row]
@@ -570,7 +811,6 @@ class MainWindow(QMainWindow):
         new_credit = vals["credits"]
         new_category = vals["category"]
 
-        # 이름이 바뀐 경우 완전 중복 재검사
         if (new_name != course.name or vals["day"] != course.day
                 or vals["start_period"] != course.start_period
                 or vals["end_period"] != course.end_period):
@@ -590,14 +830,12 @@ class MainWindow(QMainWindow):
                 )
                 return
 
-        # 이름이나 학점이 바뀐 경우 그룹 학점 불일치 재검사
         if new_name != course.name or new_credit != course.credits:
             same_group = [
                 c for c in self.courses
                 if c is not course and c.name == new_name and new_category != "PNP"
             ]
             if same_group:
-                # credits=0 정규화 슬롯은 불일치 검사에서 제외
                 existing_credits = {c.credits for c in same_group if c.credits > 0}
                 if existing_credits and new_credit not in existing_credits:
                     existing_str = ", ".join(str(v) for v in sorted(existing_credits))
@@ -611,9 +849,9 @@ class MainWindow(QMainWindow):
                     if reply == QMessageBox.No:
                         return
 
-        # 이름이 변경됐다면 그룹 색상 재결정
         if new_name != course.name:
-            new_color = self._find_group_color(new_name) or course._generate_dark_pastel_color()
+            from models import _next_color
+            new_color = self._find_group_color(new_name) or _next_color()
             course.color = new_color
 
         course.name         = vals["name"]
@@ -637,7 +875,6 @@ class MainWindow(QMainWindow):
     # ══════════════════════════════════════════
 
     def start_generation(self):
-        # 사전 검증: 고정 학점이 목표 초과 여부
         from logic import ScheduleGenerator as SG
         fixed_credits = SG._count_credits_by_group(
             [c for c in self.courses if c.is_fixed and c.category != "PNP"]
@@ -704,6 +941,7 @@ class MainWindow(QMainWindow):
             return
 
         self.result_tabs.clear()
+        self.schedules = results   # 팔레트 변경 시 재사용을 위해 저장
         if not results:
             QMessageBox.information(
                 self, "결과 없음",
@@ -724,15 +962,13 @@ class MainWindow(QMainWindow):
             tab.set_period_times(self.period_times)
             tab.load_schedule(schedule)
 
-            major  = ScheduleGenerator._count_credits_by_group([c for c in schedule if c.category == "전공"])
-            ge     = ScheduleGenerator._count_credits_by_group([c for c in schedule if c.category == "교양"])
-            other  = ScheduleGenerator._count_credits_by_group([c for c in schedule if c.category == "기타"])
-            pnp_n  = len({c.name for c in schedule if c.category == "PNP"})
-            total  = major + ge + other
+            major = ScheduleGenerator._count_credits_by_group([c for c in schedule if c.category == "전공"])
+            ge    = ScheduleGenerator._count_credits_by_group([c for c in schedule if c.category == "교양"])
+            other = ScheduleGenerator._count_credits_by_group([c for c in schedule if c.category == "기타"])
+            pnp_n = len({c.name for c in schedule if c.category == "PNP"})
+            total = major + ge + other
 
-            summary = (
-                f"총 {total}학점  |  전공: {major}  교양: {ge}  기타: {other}"
-            )
+            summary = f"총 {total}학점  |  전공: {major}  교양: {ge}  기타: {other}"
             if pnp_n:
                 summary += f"  |  PNP: {pnp_n}과목"
             tab.set_summary(summary)
@@ -779,14 +1015,13 @@ class MainWindow(QMainWindow):
                 with open(path, "r", encoding="utf-8") as f:
                     self.courses = [Course.from_dict(d) for d in json.load(f)]
                 self._normalize_linked_credits()
+                self._normalize_group_colors()
                 self.update_course_list()
                 QMessageBox.information(self, "성공", "불러왔습니다.")
             except Exception as e:
                 QMessageBox.critical(self, "실패", str(e))
 
     def _normalize_linked_credits(self):
-        """불러온 데이터의 분리수업 슬롯 학점을 정규화합니다.
-        같은 그룹(name)의 linked 슬롯 중 첫 번째만 학점을 갖고, 나머지는 0으로 설정합니다."""
         seen_linked: set = set()
         for c in self.courses:
             if not c.is_linked:
@@ -795,6 +1030,15 @@ class MainWindow(QMainWindow):
                 c.credits = 0
             else:
                 seen_linked.add(c.name)
+
+    def _normalize_group_colors(self):
+        """같은 그룹(name)의 과목 색상을 첫 번째 항목 기준으로 통일합니다."""
+        group_colors: dict = {}
+        for c in self.courses:
+            if c.name not in group_colors:
+                group_colors[c.name] = c.color
+            else:
+                c.color = group_colors[c.name]
 
 
 if __name__ == "__main__":
