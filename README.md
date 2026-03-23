@@ -18,11 +18,12 @@
 
 <br/>
 
+[⬇️ **exe 다운로드 (Windows)**](#-빠른-시작--exe-실행) · [🐍 Python으로 실행](#-python으로-실행) · [📖 사용 방법](#-사용-방법) · [🗺️ 로드맵](#️-로드맵)
+
+<br/>
 <!-- 히어로 이미지: GitHub Issues에 업로드 후 URL 교체 -->
 <img src="https://github.com/user-attachments/assets/11cb9c09-89e3-4f8d-9aea-478b53f39d7f" width="780" alt="히어로 이미지"/>
 
-<br/><br/>
-[⬇️ **exe 다운로드 (Windows)**](#-빠른-시작--exe-실행) · [🐍 Python으로 실행](#-python으로-실행) · [📖 사용 방법](#-사용-방법) · [🗺️ 로드맵](#️-로드맵)
 <br/>
 
 </div>
