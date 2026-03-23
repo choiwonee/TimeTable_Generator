@@ -33,8 +33,17 @@ class ScheduleGenerator:
         ── 성능 ──
           학점 내림차순 정렬 + 접미 누적합 기반 DFS 가지치기.
         """
-        fixed = [c for c in self.all_courses if c.is_fixed]
-        optional = [c for c in self.all_courses if not c.is_fixed]
+        linked_fixed_names = {
+            c.name for c in self.all_courses if c.is_fixed and c.is_linked
+        }
+        fixed = [
+            c for c in self.all_courses
+            if c.is_fixed or (c.is_linked and c.name in linked_fixed_names)
+        ]
+        optional = [
+            c for c in self.all_courses
+            if not c.is_fixed and not (c.is_linked and c.name in linked_fixed_names)
+        ]
 
         # 그룹 내 학점 불일치 검사 (전체 과목 대상)
         mismatches = self.find_credit_mismatches(self.all_courses)
