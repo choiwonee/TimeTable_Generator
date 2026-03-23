@@ -34,7 +34,7 @@
 
 > Python 설치 없이 바로 실행할 수 있습니다. **Windows 전용.**
 
-**[📦 TimeTable-Manager.exe 다운로드 (Google Drive)](https://drive.google.com/your-link-here)**
+**[📦 TimeTable-Generator.exe 다운로드 (Google Drive)](https://drive.google.com/your-link-here)**
 
 1. 위 링크에서 `TimeTable-Generator.exe` 다운로드
 2. 파일 더블클릭으로 즉시 실행
