@@ -64,7 +64,7 @@ Python이 없다면 → [python.org/downloads](https://www.python.org/downloads/
 ### 2. 저장소 받기
 
 ```bash
-git clone https://github.com/choiwonee/Timetable_Generator.git
+git clone https://github.com/choiwonee/TimeTable_Generator.git
 cd timetable-generator
 ```
 
