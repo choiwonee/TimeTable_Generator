@@ -29,7 +29,6 @@
 
 </div>
 
-## 🖥️ 스크린샷
 
 > 앱은 시스템 설정을 자동 감지하여 라이트 / 다크 테마로 전환됩니다.
 
@@ -150,7 +149,6 @@ python main.py
 
 </details>
 
----
 
 ### Step 3 — 고정 과목 · PNP 설정
 
@@ -161,7 +159,6 @@ python main.py
 | **고정 체크박스** | 모든 시간표에 반드시 포함. 이미 수강 신청한 과목에 사용 |
 | **PNP 구분** | 학점 목표에서 제외. 충돌 없으면 자동으로 편성 |
 
----
 
 ### Step 4 — 생성 조건 설정
 
@@ -175,7 +172,6 @@ python main.py
 
 조건에 맞는 조합이 오른쪽에 **최대 50개 탭**으로 표시됩니다.
 
----
 
 ### Step 5 — 결과 확인 및 저장
 
@@ -194,14 +190,14 @@ python main.py
 
 | 테마 | 팔레트 |
 |---|---|
-| 🌈 무지개 | ![](https://img.shields.io/badge/-%20%20-E85858?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F08030?style=flat-square) ![](https://img.shields.io/badge/-%20%20-E8C020?style=flat-square) ![](https://img.shields.io/badge/-%20%20-50B840?style=flat-square) ![](https://img.shields.io/badge/-%20%20-20A878?style=flat-square) ![](https://img.shields.io/badge/-%20%20-2880D0?style=flat-square) ![](https://img.shields.io/badge/-%20%20-4848C8?style=flat-square) ![](https://img.shields.io/badge/-%20%20-8040B8?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C840A0?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C89870?style=flat-square) |
-| 🍰 레드벨벳 케이크 | ![](https://img.shields.io/badge/-%20%20-1A0A10?style=flat-square) ![](https://img.shields.io/badge/-%20%20-4A1820?style=flat-square) ![](https://img.shields.io/badge/-%20%20-881828?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C03030?style=flat-square) ![](https://img.shields.io/badge/-%20%20-E05858?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F08888?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F5C8C0?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C87848?style=flat-square) ![](https://img.shields.io/badge/-%20%20-5A3018?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F0E4D8?style=flat-square) |
-| 🍂 단풍 소풍 | ![](https://img.shields.io/badge/-%20%20-1E1008?style=flat-square) ![](https://img.shields.io/badge/-%20%20-5C2C10?style=flat-square) ![](https://img.shields.io/badge/-%20%20-9A3C18?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C85820?style=flat-square) ![](https://img.shields.io/badge/-%20%20-E07820?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F0A028?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F5C870?style=flat-square) ![](https://img.shields.io/badge/-%20%20-E8D890?style=flat-square) ![](https://img.shields.io/badge/-%20%20-5E7028?style=flat-square) ![](https://img.shields.io/badge/-%20%20-3A4E18?style=flat-square) |
-| 🍋 레몬 파스타 | ![](https://img.shields.io/badge/-%20%20-1C2010?style=flat-square) ![](https://img.shields.io/badge/-%20%20-2A4820?style=flat-square) ![](https://img.shields.io/badge/-%20%20-4A7830?style=flat-square) ![](https://img.shields.io/badge/-%20%20-8A9830?style=flat-square) ![](https://img.shields.io/badge/-%20%20-D4B018?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F0D028?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F8EC90?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F5E8C0?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C87040?style=flat-square) ![](https://img.shields.io/badge/-%20%20-E8D8A0?style=flat-square) |
-| 🌲 숲속 오두막 | ![](https://img.shields.io/badge/-%20%20-0A1008?style=flat-square) ![](https://img.shields.io/badge/-%20%20-1C3018?style=flat-square) ![](https://img.shields.io/badge/-%20%20-305C28?style=flat-square) ![](https://img.shields.io/badge/-%20%20-508038?style=flat-square) ![](https://img.shields.io/badge/-%20%20-78A858?style=flat-square) ![](https://img.shields.io/badge/-%20%20-A8C880?style=flat-square) ![](https://img.shields.io/badge/-%20%20-6A4828?style=flat-square) ![](https://img.shields.io/badge/-%20%20-3C2810?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C8B888?style=flat-square) ![](https://img.shields.io/badge/-%20%20-E8DEC0?style=flat-square) |
-| 🌊 아드리아해 | ![](https://img.shields.io/badge/-%20%20-060C1E?style=flat-square) ![](https://img.shields.io/badge/-%20%20-0C2858?style=flat-square) ![](https://img.shields.io/badge/-%20%20-185098?style=flat-square) ![](https://img.shields.io/badge/-%20%20-2878C8?style=flat-square) ![](https://img.shields.io/badge/-%20%20-50A8D8?style=flat-square) ![](https://img.shields.io/badge/-%20%20-90CCE8?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C8EAF0?style=flat-square) ![](https://img.shields.io/badge/-%20%20-EAD890?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C06840?style=flat-square) ![](https://img.shields.io/badge/-%20%20-1A5848?style=flat-square) |
-| 🌌 한밤의 은하수 | ![](https://img.shields.io/badge/-%20%20-050310?style=flat-square) ![](https://img.shields.io/badge/-%20%20-0C0828?style=flat-square) ![](https://img.shields.io/badge/-%20%20-201860?style=flat-square) ![](https://img.shields.io/badge/-%20%20-384098?style=flat-square) ![](https://img.shields.io/badge/-%20%20-6050C0?style=flat-square) ![](https://img.shields.io/badge/-%20%20-9878D8?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C0A8E8?style=flat-square) ![](https://img.shields.io/badge/-%20%20-183C68?style=flat-square) ![](https://img.shields.io/badge/-%20%20-30789A?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F0E8C8?style=flat-square) |
-| 🪻 프로방스 라벤더 | ![](https://img.shields.io/badge/-%20%20-181028?style=flat-square) ![](https://img.shields.io/badge/-%20%20-302458?style=flat-square) ![](https://img.shields.io/badge/-%20%20-584A98?style=flat-square) ![](https://img.shields.io/badge/-%20%20-8878C0?style=flat-square) ![](https://img.shields.io/badge/-%20%20-B0A0D8?style=flat-square) ![](https://img.shields.io/badge/-%20%20-D8D0F0?style=flat-square) ![](https://img.shields.io/badge/-%20%20-7A6878?style=flat-square) ![](https://img.shields.io/badge/-%20%20-4A5838?style=flat-square) ![](https://img.shields.io/badge/-%20%20-887860?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F0E4D0?style=flat-square) |
+| 🌈 무지개 | ![](https://placehold.co/28x20/E85858/E85858.png) ![](https://placehold.co/28x20/F08030/F08030.png) ![](https://placehold.co/28x20/E8C020/E8C020.png) ![](https://placehold.co/28x20/50B840/50B840.png) ![](https://placehold.co/28x20/20A878/20A878.png) ![](https://placehold.co/28x20/2880D0/2880D0.png) ![](https://placehold.co/28x20/4848C8/4848C8.png) ![](https://placehold.co/28x20/8040B8/8040B8.png) ![](https://placehold.co/28x20/C840A0/C840A0.png) ![](https://placehold.co/28x20/C89870/C89870.png) |
+| 🍰 레드벨벳 케이크 | ![](https://placehold.co/28x20/1A0A10/1A0A10.png) ![](https://placehold.co/28x20/4A1820/4A1820.png) ![](https://placehold.co/28x20/881828/881828.png) ![](https://placehold.co/28x20/C03030/C03030.png) ![](https://placehold.co/28x20/E05858/E05858.png) ![](https://placehold.co/28x20/F08888/F08888.png) ![](https://placehold.co/28x20/F5C8C0/F5C8C0.png) ![](https://placehold.co/28x20/C87848/C87848.png) ![](https://placehold.co/28x20/5A3018/5A3018.png) ![](https://placehold.co/28x20/F0E4D8/F0E4D8.png) |
+| 🍂 단풍 소풍 | ![](https://placehold.co/28x20/1E1008/1E1008.png) ![](https://placehold.co/28x20/5C2C10/5C2C10.png) ![](https://placehold.co/28x20/9A3C18/9A3C18.png) ![](https://placehold.co/28x20/C85820/C85820.png) ![](https://placehold.co/28x20/E07820/E07820.png) ![](https://placehold.co/28x20/F0A028/F0A028.png) ![](https://placehold.co/28x20/F5C870/F5C870.png) ![](https://placehold.co/28x20/E8D890/E8D890.png) ![](https://placehold.co/28x20/5E7028/5E7028.png) ![](https://placehold.co/28x20/3A4E18/3A4E18.png) |
+| 🍋 레몬 파스타 | ![](https://placehold.co/28x20/1C2010/1C2010.png) ![](https://placehold.co/28x20/2A4820/2A4820.png) ![](https://placehold.co/28x20/4A7830/4A7830.png) ![](https://placehold.co/28x20/8A9830/8A9830.png) ![](https://placehold.co/28x20/D4B018/D4B018.png) ![](https://placehold.co/28x20/F0D028/F0D028.png) ![](https://placehold.co/28x20/F8EC90/F8EC90.png) ![](https://placehold.co/28x20/F5E8C0/F5E8C0.png) ![](https://placehold.co/28x20/C87040/C87040.png) ![](https://placehold.co/28x20/E8D8A0/E8D8A0.png) |
+| 🌲 숲속 오두막 | ![](https://placehold.co/28x20/0A1008/0A1008.png) ![](https://placehold.co/28x20/1C3018/1C3018.png) ![](https://placehold.co/28x20/305C28/305C28.png) ![](https://placehold.co/28x20/508038/508038.png) ![](https://placehold.co/28x20/78A858/78A858.png) ![](https://placehold.co/28x20/A8C880/A8C880.png) ![](https://placehold.co/28x20/6A4828/6A4828.png) ![](https://placehold.co/28x20/3C2810/3C2810.png) ![](https://placehold.co/28x20/C8B888/C8B888.png) ![](https://placehold.co/28x20/E8DEC0/E8DEC0.png) |
+| 🌊 아드리아해 | ![](https://placehold.co/28x20/060C1E/060C1E.png) ![](https://placehold.co/28x20/0C2858/0C2858.png) ![](https://placehold.co/28x20/185098/185098.png) ![](https://placehold.co/28x20/2878C8/2878C8.png) ![](https://placehold.co/28x20/50A8D8/50A8D8.png) ![](https://placehold.co/28x20/90CCE8/90CCE8.png) ![](https://placehold.co/28x20/C8EAF0/C8EAF0.png) ![](https://placehold.co/28x20/EAD890/EAD890.png) ![](https://placehold.co/28x20/C06840/C06840.png) ![](https://placehold.co/28x20/1A5848/1A5848.png) |
+| 🌌 한밤의 은하수 | ![](https://placehold.co/28x20/050310/050310.png) ![](https://placehold.co/28x20/0C0828/0C0828.png) ![](https://placehold.co/28x20/201860/201860.png) ![](https://placehold.co/28x20/384098/384098.png) ![](https://placehold.co/28x20/6050C0/6050C0.png) ![](https://placehold.co/28x20/9878D8/9878D8.png) ![](https://placehold.co/28x20/C0A8E8/C0A8E8.png) ![](https://placehold.co/28x20/183C68/183C68.png) ![](https://placehold.co/28x20/30789A/30789A.png) ![](https://placehold.co/28x20/F0E8C8/F0E8C8.png) |
+| 🪻 프로방스 라벤더 | ![](https://placehold.co/28x20/181028/181028.png) ![](https://placehold.co/28x20/302458/302458.png) ![](https://placehold.co/28x20/584A98/584A98.png) ![](https://placehold.co/28x20/8878C0/8878C0.png) ![](https://placehold.co/28x20/B0A0D8/B0A0D8.png) ![](https://placehold.co/28x20/D8D0F0/D8D0F0.png) ![](https://placehold.co/28x20/7A6878/7A6878.png) ![](https://placehold.co/28x20/4A5838/4A5838.png) ![](https://placehold.co/28x20/887860/887860.png) ![](https://placehold.co/28x20/F0E4D0/F0E4D0.png) |
 
 ---
 
@@ -217,6 +213,8 @@ timetable-manager/
 ├── requirements.txt
 └── README.md
 ```
+
+---
 
 ## 🛠️ 기술 스택
 
