@@ -36,7 +36,7 @@
 
 **[📦 TimeTable-Manager.exe 다운로드 (Google Drive)](https://drive.google.com/your-link-here)**
 
-1. 위 링크에서 `TimeTable-Manager.exe` 다운로드
+1. 위 링크에서 `TimeTable-Generator.exe` 다운로드
 2. 파일 더블클릭으로 즉시 실행
 
 > **⚠️ Windows 보안 경고가 뜨는 경우**  
@@ -221,7 +221,7 @@ python main.py
 ## 📁 파일 구조
 
 ```
-timetable-manager/
+timetable-generator/
 ├── main.py          # 메인 윈도우 및 전체 UI
 ├── logic.py         # 시간표 생성 알고리즘 (DFS + 가지치기)
 ├── models.py        # Course 데이터 모델 · 색상 팔레트
@@ -248,6 +248,6 @@ timetable-manager/
 
 <div align="center">
 
-만든 사람: **choiwonee** · 문의 및 버그 리포트는 [Issues](https://github.com/yourname/timetable-manager/issues)로 남겨주세요
+만든 사람: **choiwonee** · 문의 및 버그 리포트는 [Issues](https://github.com/yourname/timetable-generator/issues)로 남겨주세요
 
 </div>
