@@ -24,6 +24,8 @@
 
 </div>
 
+<br/>
+
 ---
 
 ## ⬇️ 빠른 시작 — exe 실행
@@ -38,6 +40,8 @@
 > **⚠️ Windows 보안 경고가 뜨는 경우**  
 > `추가 정보` → `실행` 을 클릭하세요.  
 > 개인 개발자 배포 앱에 표시되는 정상적인 경고입니다.
+
+<br/>
 
 ---
 
@@ -81,6 +85,8 @@ venv\Scripts\activate
 pip install -r requirements.txt
 python main.py
 ```
+
+<br/>
 
 ---
 
@@ -173,6 +179,8 @@ python main.py
 | **과목 목록 불러오기** | 상단 `강의 목록 불러오기` → 저장한 JSON 복원 |
 | **교시 시간 설정** | 우측 상단 `⚙ 교시 시간 설정` → 학교별 교시 시작 시간 입력 |
 
+<br/>
+
 ---
 
 ## 🎨 색상 테마
@@ -215,12 +223,16 @@ timetable-manager/
 └── README.md
 ```
 
+<br/>
+
 ---
 
 ## 🛠️ 기술 스택
 
 - **Python 3.10+**
 - **PySide6** — Qt for Python GUI 프레임워크
+
+<br/>
 
 ---
 
