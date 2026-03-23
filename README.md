@@ -117,6 +117,7 @@ python main.py
 <br/>
 
 추가한 과목을 수정하고 싶다면, 목록을 더블클릭하여 수정할 수 있습니다.
+
 <img src="https://github.com/user-attachments/assets/cef17210-7cee-4c74-a8c8-cc5f5b444962" width="513" alt="목록 수정 창"/>
 
 <br/>
