@@ -486,7 +486,7 @@ class MainWindow(QMainWindow):
             "🔗 분리수업 체크 = 같은 강의명끼리 세트로 묶어서 편성"
         )
         hint.setWordWrap(True)
-        _base = hint.palette().color(QPalette.Base)
+        _base = QApplication.instance().palette().color(QPalette.Base)
         _is_dark = _base.lightness() < 128
         if _is_dark:
             _hint_bg   = "rgba(255,255,255,0.06)"
@@ -579,7 +579,9 @@ class MainWindow(QMainWindow):
         settings_btn.clicked.connect(self.open_settings)
 
         palette_label = QLabel("테마:")
-        palette_label.setStyleSheet("font-size: 12px;")
+        font = palette_label.font()
+        font.setPointSize(10)
+        palette_label.setFont(font)
         self.palette_combo = QComboBox()
         self.palette_combo.addItems(list(PALETTES.keys()))
         self.palette_combo.setCurrentText(DEFAULT_PALETTE)
