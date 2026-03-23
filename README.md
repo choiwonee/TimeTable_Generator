@@ -14,7 +14,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)]()
 
-[⬇️ **exe 다운로드 (Windows)**](#-빠른-시작--exe-실행) · [🐍 Python으로 실행](#-python으로-실행) · [📖 사용 방법](#-사용-방법)
+[⬇️ **exe 다운로드 (Windows)**](#-빠른-시작---exe-실행) · [🐍 Python으로 실행](#-python으로-실행) · [📖 사용 방법](#-사용-방법)
 
 <br/>
 
@@ -30,7 +30,7 @@
 
 <br/>
 
-## ⬇️ 빠른 시작 — exe 실행
+## ⬇️ 빠른 시작 - exe 실행
 
 > Python 설치 없이 바로 실행할 수 있습니다. **Windows 전용.**
 
