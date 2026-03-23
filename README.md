@@ -18,7 +18,7 @@
 
 <br/>
 <!-- 히어로 이미지: GitHub Issues에 업로드 후 URL 교체 -->
-<img src="https://github.com/user-attachments/assets/11cb9c09-89e3-4f8d-9aea-478b53f39d7f" width="780" alt="히어로 이미지"/>
+<img src="https://github.com/user-attachments/assets/cc2670e9-2941-4095-9509-a15cb2fea2b1" width="780" alt="히어로 이미지"/>
 
 <br/>
 
@@ -212,7 +212,7 @@ python main.py
 
 | ☀️ 라이트 모드 | 🌙 다크 모드 |
 |:---:|:---:|
-| ![라이트 모드](https://github.com/user-attachments/assets/ec05c5cf-64cf-49ac-8e77-b40e1cc9ba1e) | ![다크 모드](https://github.com/user-attachments/assets/0eae527c-f4b7-4aa1-896b-db2f5aed89a3) |
+| ![라이트 모드](https://github.com/user-attachments/assets/087c900f-16a5-4f31-9de9-f9f731d8c6e3) | ![다크 모드](https://github.com/user-attachments/assets/6d5f62c0-ba51-4645-899c-d31abb12e85c) |
 
 <br/>
 
