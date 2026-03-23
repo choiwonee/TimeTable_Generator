@@ -381,7 +381,7 @@ class EditCourseDialog(QDialog):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("TimeTable Manager")
+        self.setWindowTitle("TimeTable Generator")
         self.resize(1100, 750)
         self.courses: list[Course] = []
         self.schedules: list[list] = []   # 생성된 시간표 저장 (팔레트 변경 시 재사용)
@@ -482,7 +482,7 @@ class MainWindow(QMainWindow):
 
         # ── 간소화된 안내 문구 (다크/라이트 자동 대응) ──
         hint = QLabel(
-            "💡 같은 강의명 = 시간표 생성 시 하나만 선택   "
+            "💡 같은 강의명 = 시간표 생성 시 하나만 선택\n"
             "🔗 분리수업 체크 = 같은 강의명끼리 세트로 묶어서 편성"
         )
         hint.setWordWrap(True)
@@ -578,7 +578,7 @@ class MainWindow(QMainWindow):
         settings_btn = QPushButton("⚙  교시 시간 설정")
         settings_btn.clicked.connect(self.open_settings)
 
-        palette_label = QLabel("팔레트:")
+        palette_label = QLabel("테마:")
         palette_label.setStyleSheet("font-size: 12px;")
         self.palette_combo = QComboBox()
         self.palette_combo.addItems(list(PALETTES.keys()))
