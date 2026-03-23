@@ -7,7 +7,7 @@
 
 # TimeTable Generator
 
-**수강 신청 전, 내 조건에 딱 맞는 시간표를 자동으로 찾아주는 데스크톱 앱**
+**대학생을 위한 시간표 조합 자동 생성기**
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
 [![PySide6](https://img.shields.io/badge/PySide6-Qt%20for%20Python-41CD52?style=flat-square&logo=qt&logoColor=white)](https://doc.qt.io/qtforpython/)
@@ -17,7 +17,7 @@
 [⬇️ **exe 다운로드 (Windows)**](#-빠른-시작--exe-실행) · [🐍 Python으로 실행](#-python으로-실행) · [📖 사용 방법](#-사용-방법)
 
 <br/>
-<!-- 히어로 이미지: GitHub Issues에 업로드 후 URL 교체 -->
+
 <img src="https://github.com/user-attachments/assets/8f2c8ca4-be6e-46fc-81f5-1e06d09e6dd6" width="780" alt="프리뷰 이미지"/>
 
 <br/>
@@ -34,7 +34,7 @@
 
 > Python 설치 없이 바로 실행할 수 있습니다. **Windows 전용.**
 
-**[📦 TimeTable-Generator.exe 다운로드 (Google Drive)](https://drive.google.com/your-link-here)**
+**[📦 TimeTable-Generator.exe 다운로드](https://github.com/choiwonee/TimeTable_Generator/releases/latest)**
 
 1. 위 링크에서 `TimeTable-Generator.exe` 다운로드
 2. 파일 더블클릭으로 즉시 실행
