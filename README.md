@@ -1,152 +1,207 @@
-# 📅 TimeTable Manager
+<div align="center">
 
-대학교 시간표를 자동으로 만들어주는 데스크톱 앱입니다.  
-듣고 싶은 과목들을 입력하면 **조건에 맞는 시간표 조합을 자동으로 찾아줍니다.**
+<br/>
 
-![스크린샷](assets/screenshot.png)
+<!-- 앱 아이콘: .ico → .png로 변환 후 GitHub Issues에 업로드하고 아래 URL 교체 -->
+<img src="https://github.com/user-attachments/assets/your-icon-id" height="72" alt="앱 아이콘"/>
+
+# TimeTable Manager
+
+**수강 신청 전, 내 조건에 딱 맞는 시간표를 자동으로 찾아주는 데스크톱 앱**
+
+<br/>
+
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
+[![PySide6](https://img.shields.io/badge/PySide6-Qt%20for%20Python-41CD52?style=flat-square&logo=qt&logoColor=white)](https://doc.qt.io/qtforpython/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)]()
+
+<br/>
+
+<!-- 히어로 이미지: GitHub Issues에 업로드 후 URL 교체 -->
+<img src="https://github.com/user-attachments/assets/your-hero-image-id" width="780" alt="히어로 이미지"/>
+
+<br/><br/>
+
+[⬇️ **exe 다운로드 (Windows)**](#-빠른-시작--exe-실행) · [🐍 Python으로 실행](#-python으로-실행) · [📖 사용 방법](#-사용-방법) · [🗺️ 로드맵](#️-로드맵)
+
+<br/>
+
+</div>
+
+## 🖥️ 스크린샷
+
+> 앱은 시스템 설정을 자동 감지하여 라이트 / 다크 테마로 전환됩니다.
+
+| ☀️ 라이트 모드 | 🌙 다크 모드 |
+|:---:|:---:|
+| ![라이트 모드](https://github.com/user-attachments/assets/ec05c5cf-64cf-49ac-8e77-b40e1cc9ba1e) | ![다크 모드](https://github.com/user-attachments/assets/0eae527c-f4b7-4aa1-896b-db2f5aed89a3) |
 
 ---
 
-## ✨ 이런 분께 유용해요
+## ⬇️ 빠른 시작 — exe 실행
 
-- 수강 신청 전에 시간표 조합을 미리 확인하고 싶은 분
-- 공강 요일이나 최대 공강 시간 조건을 맞추고 싶은 분
-- 분반이 여러 개인 과목 중 어떤 조합이 가능한지 알고 싶은 분
+> Python 설치 없이 바로 실행할 수 있습니다. **Windows 전용.**
+
+**[📦 TimeTable-Manager.exe 다운로드 (Google Drive)](https://drive.google.com/your-link-here)**
+
+1. 위 링크에서 `TimeTable-Manager.exe` 다운로드
+2. 파일 더블클릭으로 즉시 실행
+
+> **⚠️ Windows 보안 경고가 뜨는 경우**  
+> `추가 정보` → `실행` 을 클릭하세요.  
+> 개인 개발자 배포 앱에 표시되는 정상적인 경고입니다.
 
 ---
 
-## 🖥 설치 방법
+## 🐍 Python으로 실행
 
-### 1. Python 설치 확인
+소스코드로 직접 실행하거나 macOS / Linux에서 사용할 때 이 방법을 사용하세요.
 
-터미널(명령 프롬프트)에서 아래 명령어를 입력해 Python이 설치되어 있는지 확인합니다.
+### 1. 사전 요구사항
 
-```bash
-python --version
+```
+Python 3.10 이상
 ```
 
-> Python 3.10 이상이 필요합니다.  
-> 설치가 안 되어 있다면 [python.org](https://www.python.org/downloads/)에서 받아주세요.
+Python이 없다면 → [python.org/downloads](https://www.python.org/downloads/)
 
-### 2. 저장소 다운로드
+### 2. 저장소 받기
 
 ```bash
 git clone https://github.com/yourname/timetable-manager.git
 cd timetable-manager
 ```
 
-> Git이 없다면 GitHub 페이지에서 `Code → Download ZIP`으로 받아도 됩니다.
+> Git이 없다면 페이지 상단 `Code → Download ZIP` 으로 받아도 됩니다.
 
-### 3. 가상환경 생성 및 활성화
+### 3. 가상환경 설정
 
 ```bash
 # 가상환경 생성
 python -m venv venv
 
-# 활성화 (macOS / Linux)
+# 활성화 — macOS / Linux
 source venv/bin/activate
 
-# 활성화 (Windows)
+# 활성화 — Windows
 venv\Scripts\activate
 ```
 
-### 4. 필요 패키지 설치
+### 4. 패키지 설치 및 실행
 
 ```bash
 pip install -r requirements.txt
-```
-
-### 5. 실행
-
-```bash
 python main.py
 ```
 
 ---
 
-## 🚀 사용 방법
+## 📖 사용 방법
 
 ### Step 1 — 과목 입력
 
-화면 왼쪽 **1. 강의 입력** 영역에서 과목 정보를 입력하고 **추가** 버튼을 누릅니다.
+화면 왼쪽 **① 강의 입력** 영역에서 과목 정보를 입력하고 `추가` 버튼 또는 `Enter` 를 누릅니다.
 
 | 항목 | 설명 |
-|------|------|
-| 구분 | 전공 / 교양 / 기타 / PNP 중 선택 |
-| 강의명 | 과목 이름. **같은 이름 = 같은 과목**으로 인식됩니다 |
-| 분반 | 목록에서 구분할 때 쓰는 메모 (선택 사항) |
-| 요일 / 시작·종료 교시 | 수업이 있는 시간 |
-| 학점 | 이수 학점 수 |
-| 분리수업 | 주 2회처럼 여러 시간대가 세트인 경우 체크 |
+|---|---|
+| **구분** | 전공 / 교양 / 기타 / PNP 선택 |
+| **강의명** | 같은 이름으로 입력한 과목은 같은 그룹으로 묶입니다 |
+| **분반** | 목록에서 구분할 메모 (선택 사항) |
+| **요일 / 교시** | 수업 시간 |
+| **학점** | 이수 학점 수 |
+| **분리수업** | 주 2회처럼 여러 시간대가 세트인 경우 체크 |
 
 ---
 
-### Step 2 — 분반 vs. 분리수업 이해하기
+### Step 2 — 분반 vs. 분리수업
 
-**같은 강의명**으로 등록한 과목들은 하나의 그룹으로 묶입니다.  
-이때 **분리수업 체크 여부**에 따라 동작이 달라집니다.
+같은 강의명으로 등록한 과목들은 한 그룹으로 묶입니다.  
+**분리수업 체크 여부**에 따라 동작이 달라집니다.
 
-#### 📌 분반 (분리수업 미체크)
-같은 이름으로 여러 시간대를 등록하면, 시간표 생성 시 **그 중 하나만 선택**됩니다.
+<details>
+<summary><b>📌 분반 (분리수업 미체크)</b> — 여러 시간 중 하나만 선택</summary>
 
-```
-예) 영어회화 (화 5-6교시)
-    영어회화 (목 3-4교시)
-→ 둘 중 하나가 자동 선택됨
-```
+<br/>
 
-#### 📌 분리수업 (분리수업 체크)
-같은 이름으로 등록된 슬롯이 **항상 세트로 함께 선택**됩니다.
+같은 강의명으로 여러 시간대를 등록하면, 시간표 생성 시 **그 중 하나만** 자동으로 선택됩니다.
 
 ```
-예) 대학수학 (월 1-2교시) ← 분리수업 체크
-    대학수학 (목 1-2교시) ← 분리수업 체크
-→ 두 슬롯이 반드시 함께 편성됨
+예)  영어회화   화 3–4교시
+     영어회화   목 3–4교시
+→ 둘 중 하나가 자동 편성됨
 ```
+
+</details>
+
+<details>
+<summary><b>🔗 분리수업 (분리수업 체크)</b> — 항상 세트로 함께 편성</summary>
+
+<br/>
+
+같은 강의명의 항목들이 **항상 세트로 함께** 편성됩니다.  
+주 2회처럼 여러 시간대가 묶이는 수업에 사용하세요.
+
+```
+예)  대학수학   월 1–2교시  ← 분리수업 체크
+     대학수학   목 1–2교시  ← 분리수업 체크
+→ 두 시간대가 반드시 함께 편성됨
+```
+
+</details>
 
 ---
 
-### Step 3 — 고정 과목 설정
+### Step 3 — 고정 과목 · PNP 설정
 
-**2. 강의 목록** 표의 **고정** 체크박스를 활성화하면, 해당 과목이 모든 시간표에 반드시 포함됩니다.  
-이미 수강 신청이 완료된 과목이나 꼭 들어야 하는 과목에 사용하세요.
+**② 강의 목록** 표에서 설정합니다.
+
+| 기능 | 설명 |
+|---|---|
+| **고정 체크박스** | 모든 시간표에 반드시 포함. 이미 수강 신청한 과목에 사용 |
+| **PNP 구분** | 학점 목표에서 제외. 충돌 없으면 자동으로 편성 |
 
 ---
 
 ### Step 4 — 생성 조건 설정
 
-**3. 생성 조건** 영역에서 원하는 조건을 설정합니다.
+**③ 생성 조건** 영역에서 원하는 조건을 설정한 뒤 `시간표 생성` 버튼을 누릅니다.
 
 | 항목 | 설명 |
-|------|------|
-| 목표 학점 | 완성된 시간표의 총 학점 (PNP 제외) |
-| 최대 공강(교시) | 같은 날 수업 사이에 허용할 최대 빈 교시 수 |
-| 공강 요일 | 아예 수업을 넣지 않을 요일 |
+|---|---|
+| **목표 학점** | 완성 시간표의 총 학점 (PNP 제외) |
+| **최대 공강** | 같은 날 수업 사이에 허용할 최대 빈 교시 수 |
+| **공강 요일** | 수업을 아예 넣지 않을 요일 |
 
-설정이 끝나면 **시간표 생성** 버튼을 누릅니다.
+조건에 맞는 조합이 오른쪽에 **최대 50개 탭**으로 표시됩니다.
 
 ---
 
 ### Step 5 — 결과 확인 및 저장
 
-생성된 시간표가 오른쪽 탭(1번, 2번 …)에 표시됩니다.  
-마음에 드는 탭을 선택한 뒤 **이미지로 저장** 버튼을 눌러 PNG/JPG 파일로 내보낼 수 있습니다.
+| 기능 | 방법 |
+|---|---|
+| **이미지 저장** | 원하는 탭 선택 → `이미지로 저장` → PNG / JPG 내보내기 |
+| **과목 목록 저장** | 상단 `강의 목록 저장` → JSON 파일로 저장 |
+| **과목 목록 불러오기** | 상단 `강의 목록 불러오기` → 저장한 JSON 복원 |
+| **교시 시간 설정** | 우측 상단 `⚙ 교시 시간 설정` → 학교별 교시 시작 시간 입력 |
 
 ---
 
-## 💾 과목 목록 저장 / 불러오기
+## 🎨 색상 테마
 
-매번 다시 입력하지 않아도 됩니다.
+오른쪽 상단 **테마 선택**에서 시간표 색상 팔레트를 변경할 수 있습니다.
 
-- **강의 목록 저장** — 현재 과목 목록을 JSON 파일로 저장
-- **강의 목록 불러오기** — 저장해 둔 JSON 파일을 불러와 목록 복원
-
----
-
-## ⚙ 교시 시간 설정
-
-상단의 **교시 시간 설정** 버튼을 누르면 학교마다 다른 교시 시작 시간을 직접 입력할 수 있습니다.  
-설정하면 시간표 세로 헤더에 시작 시간이 함께 표시됩니다.
+| 테마 | 팔레트 |
+|---|---|
+| 🌈 무지개 | ![](https://img.shields.io/badge/-%20%20-E85858?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F08030?style=flat-square) ![](https://img.shields.io/badge/-%20%20-E8C020?style=flat-square) ![](https://img.shields.io/badge/-%20%20-50B840?style=flat-square) ![](https://img.shields.io/badge/-%20%20-20A878?style=flat-square) ![](https://img.shields.io/badge/-%20%20-2880D0?style=flat-square) ![](https://img.shields.io/badge/-%20%20-4848C8?style=flat-square) ![](https://img.shields.io/badge/-%20%20-8040B8?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C840A0?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C89870?style=flat-square) |
+| 🍰 레드벨벳 케이크 | ![](https://img.shields.io/badge/-%20%20-1A0A10?style=flat-square) ![](https://img.shields.io/badge/-%20%20-4A1820?style=flat-square) ![](https://img.shields.io/badge/-%20%20-881828?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C03030?style=flat-square) ![](https://img.shields.io/badge/-%20%20-E05858?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F08888?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F5C8C0?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C87848?style=flat-square) ![](https://img.shields.io/badge/-%20%20-5A3018?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F0E4D8?style=flat-square) |
+| 🍂 단풍 소풍 | ![](https://img.shields.io/badge/-%20%20-1E1008?style=flat-square) ![](https://img.shields.io/badge/-%20%20-5C2C10?style=flat-square) ![](https://img.shields.io/badge/-%20%20-9A3C18?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C85820?style=flat-square) ![](https://img.shields.io/badge/-%20%20-E07820?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F0A028?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F5C870?style=flat-square) ![](https://img.shields.io/badge/-%20%20-E8D890?style=flat-square) ![](https://img.shields.io/badge/-%20%20-5E7028?style=flat-square) ![](https://img.shields.io/badge/-%20%20-3A4E18?style=flat-square) |
+| 🍋 레몬 파스타 | ![](https://img.shields.io/badge/-%20%20-1C2010?style=flat-square) ![](https://img.shields.io/badge/-%20%20-2A4820?style=flat-square) ![](https://img.shields.io/badge/-%20%20-4A7830?style=flat-square) ![](https://img.shields.io/badge/-%20%20-8A9830?style=flat-square) ![](https://img.shields.io/badge/-%20%20-D4B018?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F0D028?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F8EC90?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F5E8C0?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C87040?style=flat-square) ![](https://img.shields.io/badge/-%20%20-E8D8A0?style=flat-square) |
+| 🌲 숲속 오두막 | ![](https://img.shields.io/badge/-%20%20-0A1008?style=flat-square) ![](https://img.shields.io/badge/-%20%20-1C3018?style=flat-square) ![](https://img.shields.io/badge/-%20%20-305C28?style=flat-square) ![](https://img.shields.io/badge/-%20%20-508038?style=flat-square) ![](https://img.shields.io/badge/-%20%20-78A858?style=flat-square) ![](https://img.shields.io/badge/-%20%20-A8C880?style=flat-square) ![](https://img.shields.io/badge/-%20%20-6A4828?style=flat-square) ![](https://img.shields.io/badge/-%20%20-3C2810?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C8B888?style=flat-square) ![](https://img.shields.io/badge/-%20%20-E8DEC0?style=flat-square) |
+| 🌊 아드리아해 | ![](https://img.shields.io/badge/-%20%20-060C1E?style=flat-square) ![](https://img.shields.io/badge/-%20%20-0C2858?style=flat-square) ![](https://img.shields.io/badge/-%20%20-185098?style=flat-square) ![](https://img.shields.io/badge/-%20%20-2878C8?style=flat-square) ![](https://img.shields.io/badge/-%20%20-50A8D8?style=flat-square) ![](https://img.shields.io/badge/-%20%20-90CCE8?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C8EAF0?style=flat-square) ![](https://img.shields.io/badge/-%20%20-EAD890?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C06840?style=flat-square) ![](https://img.shields.io/badge/-%20%20-1A5848?style=flat-square) |
+| 🌌 한밤의 은하수 | ![](https://img.shields.io/badge/-%20%20-050310?style=flat-square) ![](https://img.shields.io/badge/-%20%20-0C0828?style=flat-square) ![](https://img.shields.io/badge/-%20%20-201860?style=flat-square) ![](https://img.shields.io/badge/-%20%20-384098?style=flat-square) ![](https://img.shields.io/badge/-%20%20-6050C0?style=flat-square) ![](https://img.shields.io/badge/-%20%20-9878D8?style=flat-square) ![](https://img.shields.io/badge/-%20%20-C0A8E8?style=flat-square) ![](https://img.shields.io/badge/-%20%20-183C68?style=flat-square) ![](https://img.shields.io/badge/-%20%20-30789A?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F0E8C8?style=flat-square) |
+| 🪻 프로방스 라벤더 | ![](https://img.shields.io/badge/-%20%20-181028?style=flat-square) ![](https://img.shields.io/badge/-%20%20-302458?style=flat-square) ![](https://img.shields.io/badge/-%20%20-584A98?style=flat-square) ![](https://img.shields.io/badge/-%20%20-8878C0?style=flat-square) ![](https://img.shields.io/badge/-%20%20-B0A0D8?style=flat-square) ![](https://img.shields.io/badge/-%20%20-D8D0F0?style=flat-square) ![](https://img.shields.io/badge/-%20%20-7A6878?style=flat-square) ![](https://img.shields.io/badge/-%20%20-4A5838?style=flat-square) ![](https://img.shields.io/badge/-%20%20-887860?style=flat-square) ![](https://img.shields.io/badge/-%20%20-F0E4D0?style=flat-square) |
 
 ---
 
@@ -154,25 +209,30 @@ python main.py
 
 ```
 timetable-manager/
-├── main.py          # 메인 윈도우 및 UI 전체
-├── logic.py         # 시간표 생성 알고리즘
-├── models.py        # 과목(Course) 데이터 모델
+├── main.py          # 메인 윈도우 및 전체 UI
+├── logic.py         # 시간표 생성 알고리즘 (DFS + 가지치기)
+├── models.py        # Course 데이터 모델 · 색상 팔레트
 ├── ui_widgets.py    # 시간표 표시 위젯
-├── constants.py     # 요일 목록, 기본 교시 시간
+├── constants.py     # 요일 목록 · 기본 교시 시간
 ├── requirements.txt
-└── assets/
-    └── screenshot.png
+└── README.md
 ```
 
----
-
-## 🛠 기술 스택
+## 🛠️ 기술 스택
 
 - **Python 3.10+**
-- **PySide6** (Qt for Python) — GUI 프레임워크
+- **PySide6** — Qt for Python GUI 프레임워크
 
 ---
 
 ## 📄 라이선스
 
-MIT License
+이 프로젝트는 [MIT License](LICENSE) 하에 배포됩니다.
+
+---
+
+<div align="center">
+
+만든 사람: **yourname** · 문의 및 버그 리포트는 [Issues](https://github.com/yourname/timetable-manager/issues)로 남겨주세요
+
+</div>
