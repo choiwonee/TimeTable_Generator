@@ -15,6 +15,7 @@
 [![PySide6](https://img.shields.io/badge/PySide6-Qt%20for%20Python-41CD52?style=flat-square&logo=qt&logoColor=white)](https://doc.qt.io/qtforpython/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)]()
+[![Tests](https://img.shields.io/badge/Tests-33%20passed-brightgreen?style=flat-square&logo=pytest&logoColor=white)](test_logic.py)
 
 [⬇️ **exe 다운로드 (Windows)**](#quickstart) · [🐍 Python으로 실행](#-python으로-실행) · [📖 사용 방법](#-사용-방법)
 
@@ -238,6 +239,7 @@ timetable-generator/
 ├── models.py        # Course 데이터 모델 · 색상 팔레트
 ├── ui_widgets.py    # 시간표 표시 위젯
 ├── constants.py     # 요일 목록 · 기본 교시 시간
+├── test_logic.py    # logic.py 단위 테스트 (pytest)
 ├── requirements.txt
 └── README.md
 ```
@@ -248,6 +250,25 @@ timetable-generator/
 
 - **Python 3.10+**
 - **PySide6** — Qt for Python GUI 프레임워크
+
+---
+
+## 🧪 테스트
+```bash
+pip install pytest
+pytest test_logic.py -v
+```
+
+`logic.py`의 핵심 알고리즘에 대한 단위 테스트 33개가 포함되어 있습니다.
+
+| 테스트 대상 | 테스트 항목 |
+|---|---|
+| `has_conflict` | 시간 충돌 감지 |
+| `check_empty_days` | 공강 요일 필터 |
+| `check_max_gap` | 최대 공강 교시 제한 |
+| `find_credit_mismatches` | 그룹 내 학점 불일치 감지 |
+| `_count_credits_by_group` | 그룹별 학점 합산 |
+| `generate` | 분반 선택, 분리수업, 고정 과목, PNP 등 통합 시나리오 |
 
 ---
 
