@@ -257,6 +257,6 @@ timetable-generator/
 
 <div align="center">
 
-만든 사람: **choiwonee** · 문의 및 버그 리포트는 [Issues](https://github.com/yourname/timetable-generator/issues)로 남겨주세요
+만든 사람: **choiwonee** · 문의 및 버그 리포트는 [Issues](https://github.com/choiwonee/TimeTable_Generator/issues)로 남겨주세요
 
 </div>
