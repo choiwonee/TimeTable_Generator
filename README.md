@@ -223,16 +223,12 @@ timetable-manager/
 └── README.md
 ```
 
-<br/>
-
 ---
 
 ## 🛠️ 기술 스택
 
 - **Python 3.10+**
 - **PySide6** — Qt for Python GUI 프레임워크
-
-<br/>
 
 ---
 
