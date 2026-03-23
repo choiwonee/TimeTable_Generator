@@ -18,7 +18,7 @@
 
 <br/>
 <!-- 히어로 이미지: GitHub Issues에 업로드 후 URL 교체 -->
-<img src="https://github.com/user-attachments/assets/8f2c8ca4-be6e-46fc-81f5-1e06d09e6dd6" width="780" alt="히어로 이미지"/>
+<img src="https://github.com/user-attachments/assets/8f2c8ca4-be6e-46fc-81f5-1e06d09e6dd6" width="780" alt="프리뷰 이미지"/>
 
 <br/>
 
@@ -98,6 +98,9 @@ python main.py
 
 ## 📖 사용 방법
 
+>사용 방법은 프로그램 내에서도 확인할 수 있습니다.
+<img src="https://github.com/user-attachments/assets/374fde32-fc7e-4b24-a023-2709dbb46c9f" width="197" alt="사용 방법 버튼"/>
+
 ### Step 1 — 과목 입력
 
 화면 왼쪽 **① 강의 입력** 영역에서 과목 정보를 입력하고 `추가` 버튼 또는 `Enter` 를 누릅니다.
@@ -110,6 +113,11 @@ python main.py
 | **요일 / 교시** | 수업 시간 |
 | **학점** | 이수 학점 수 |
 | **분리수업** | 주 2회처럼 여러 시간대가 세트인 경우 체크 |
+
+<br/>
+
+추가한 과목을 수정하고 싶다면, 목록을 더블클릭하여 수정할 수 있습니다.
+<img src="https://github.com/user-attachments/assets/cef17210-7cee-4c74-a8c8-cc5f5b444962" width="513" alt="목록 수정 창"/>
 
 <br/>
 
