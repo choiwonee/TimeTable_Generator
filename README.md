@@ -3,8 +3,7 @@
 <br/>
 
 <!-- 앱 아이콘: .ico → .png로 변환 후 GitHub Issues에 업로드하고 아래 URL 교체 -->
-<img src="https://github.com/user-attachments/assets/your-icon-id" height="72" alt="앱 아이콘"/>
-
+<img src="https://github.com/user-attachments/assets/e156d90d-373c-4f37-9899-576d3c9c2a36" height="72" alt="앱 아이콘"/>
 # TimeTable Manager
 
 **수강 신청 전, 내 조건에 딱 맞는 시간표를 자동으로 찾아주는 데스크톱 앱**
