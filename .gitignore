@@ -22,3 +22,15 @@ __pycache__/
 # OS 파일
 .DS_Store
 Thumbs.db
+
+# 사용자가 저장한 강의 목록 JSON (개인 데이터)
+*.json
+
+# 사용자가 저장한 시간표 이미지
+*.png
+*.jpg
+*.jpeg
+
+# PyInstaller 워크파일
+*.manifest
+*.pyz
