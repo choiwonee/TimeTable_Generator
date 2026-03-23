@@ -5,7 +5,7 @@
 <!-- 앱 아이콘: .ico → .png로 변환 후 GitHub Issues에 업로드하고 아래 URL 교체 -->
 <img src="https://github.com/user-attachments/assets/e156d90d-373c-4f37-9899-576d3c9c2a36" height="72" alt="앱 아이콘"/>
 
-# TimeTable Manager
+# TimeTable Generator
 
 **수강 신청 전, 내 조건에 딱 맞는 시간표를 자동으로 찾아주는 데스크톱 앱**
 
@@ -64,8 +64,8 @@ Python이 없다면 → [python.org/downloads](https://www.python.org/downloads/
 ### 2. 저장소 받기
 
 ```bash
-git clone https://github.com/yourname/timetable-manager.git
-cd timetable-manager
+git clone https://github.com/choiwonee/Timetable_Generator.git
+cd timetable-generator
 ```
 
 > Git이 없다면 페이지 상단 `Code → Download ZIP` 으로 받아도 됩니다.
@@ -248,6 +248,6 @@ timetable-manager/
 
 <div align="center">
 
-만든 사람: **yourname** · 문의 및 버그 리포트는 [Issues](https://github.com/yourname/timetable-manager/issues)로 남겨주세요
+만든 사람: **choiwonee** · 문의 및 버그 리포트는 [Issues](https://github.com/yourname/timetable-manager/issues)로 남겨주세요
 
 </div>
