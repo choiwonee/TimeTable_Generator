@@ -9,8 +9,6 @@
 
 **수강 신청 전, 내 조건에 딱 맞는 시간표를 자동으로 찾아주는 데스크톱 앱**
 
-<br/>
-
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
 [![PySide6](https://img.shields.io/badge/PySide6-Qt%20for%20Python-41CD52?style=flat-square&logo=qt&logoColor=white)](https://doc.qt.io/qtforpython/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
@@ -25,13 +23,6 @@
 <br/>
 
 </div>
-
-
-> 앱은 시스템 설정을 자동 감지하여 라이트 / 다크 테마로 전환됩니다.
-
-| ☀️ 라이트 모드 | 🌙 다크 모드 |
-|:---:|:---:|
-| ![라이트 모드](https://github.com/user-attachments/assets/ec05c5cf-64cf-49ac-8e77-b40e1cc9ba1e) | ![다크 모드](https://github.com/user-attachments/assets/0eae527c-f4b7-4aa1-896b-db2f5aed89a3) |
 
 ---
 
@@ -195,6 +186,12 @@ python main.py
 | 🌊 아드리아해 | ![](https://placehold.co/28x20/060C1E/060C1E.png) ![](https://placehold.co/28x20/0C2858/0C2858.png) ![](https://placehold.co/28x20/185098/185098.png) ![](https://placehold.co/28x20/2878C8/2878C8.png) ![](https://placehold.co/28x20/50A8D8/50A8D8.png) ![](https://placehold.co/28x20/90CCE8/90CCE8.png) ![](https://placehold.co/28x20/C8EAF0/C8EAF0.png) ![](https://placehold.co/28x20/EAD890/EAD890.png) ![](https://placehold.co/28x20/C06840/C06840.png) ![](https://placehold.co/28x20/1A5848/1A5848.png) |
 | 🌌 한밤의 은하수 | ![](https://placehold.co/28x20/050310/050310.png) ![](https://placehold.co/28x20/0C0828/0C0828.png) ![](https://placehold.co/28x20/201860/201860.png) ![](https://placehold.co/28x20/384098/384098.png) ![](https://placehold.co/28x20/6050C0/6050C0.png) ![](https://placehold.co/28x20/9878D8/9878D8.png) ![](https://placehold.co/28x20/C0A8E8/C0A8E8.png) ![](https://placehold.co/28x20/183C68/183C68.png) ![](https://placehold.co/28x20/30789A/30789A.png) ![](https://placehold.co/28x20/F0E8C8/F0E8C8.png) |
 | 🪻 프로방스 라벤더 | ![](https://placehold.co/28x20/181028/181028.png) ![](https://placehold.co/28x20/302458/302458.png) ![](https://placehold.co/28x20/584A98/584A98.png) ![](https://placehold.co/28x20/8878C0/8878C0.png) ![](https://placehold.co/28x20/B0A0D8/B0A0D8.png) ![](https://placehold.co/28x20/D8D0F0/D8D0F0.png) ![](https://placehold.co/28x20/7A6878/7A6878.png) ![](https://placehold.co/28x20/4A5838/4A5838.png) ![](https://placehold.co/28x20/887860/887860.png) ![](https://placehold.co/28x20/F0E4D0/F0E4D0.png) |
+
+> 앱은 시스템 설정을 자동 감지하여 라이트 / 다크 테마로 전환됩니다.
+
+| ☀️ 라이트 모드 | 🌙 다크 모드 |
+|:---:|:---:|
+| ![라이트 모드](https://github.com/user-attachments/assets/ec05c5cf-64cf-49ac-8e77-b40e1cc9ba1e) | ![다크 모드](https://github.com/user-attachments/assets/0eae527c-f4b7-4aa1-896b-db2f5aed89a3) |
 
 ---
 
