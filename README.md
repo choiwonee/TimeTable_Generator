@@ -99,7 +99,7 @@ python main.py
 | **학점** | 이수 학점 수 |
 | **분리수업** | 주 2회처럼 여러 시간대가 세트인 경우 체크 |
 
----
+<br/>
 
 ### Step 2 — 분반 vs. 분리수업
 
@@ -137,6 +137,7 @@ python main.py
 
 </details>
 
+<br/>
 
 ### Step 3 — 고정 과목 · PNP 설정
 
@@ -147,6 +148,7 @@ python main.py
 | **고정 체크박스** | 모든 시간표에 반드시 포함. 이미 수강 신청한 과목에 사용 |
 | **PNP 구분** | 학점 목표에서 제외. 충돌 없으면 자동으로 편성 |
 
+<br/>
 
 ### Step 4 — 생성 조건 설정
 
@@ -160,6 +162,7 @@ python main.py
 
 조건에 맞는 조합이 오른쪽에 **최대 50개 탭**으로 표시됩니다.
 
+<br/>
 
 ### Step 5 — 결과 확인 및 저장
 
@@ -187,11 +190,15 @@ python main.py
 | 🌌 한밤의 은하수 | ![](https://placehold.co/28x20/050310/050310.png) ![](https://placehold.co/28x20/0C0828/0C0828.png) ![](https://placehold.co/28x20/201860/201860.png) ![](https://placehold.co/28x20/384098/384098.png) ![](https://placehold.co/28x20/6050C0/6050C0.png) ![](https://placehold.co/28x20/9878D8/9878D8.png) ![](https://placehold.co/28x20/C0A8E8/C0A8E8.png) ![](https://placehold.co/28x20/183C68/183C68.png) ![](https://placehold.co/28x20/30789A/30789A.png) ![](https://placehold.co/28x20/F0E8C8/F0E8C8.png) |
 | 🪻 프로방스 라벤더 | ![](https://placehold.co/28x20/181028/181028.png) ![](https://placehold.co/28x20/302458/302458.png) ![](https://placehold.co/28x20/584A98/584A98.png) ![](https://placehold.co/28x20/8878C0/8878C0.png) ![](https://placehold.co/28x20/B0A0D8/B0A0D8.png) ![](https://placehold.co/28x20/D8D0F0/D8D0F0.png) ![](https://placehold.co/28x20/7A6878/7A6878.png) ![](https://placehold.co/28x20/4A5838/4A5838.png) ![](https://placehold.co/28x20/887860/887860.png) ![](https://placehold.co/28x20/F0E4D0/F0E4D0.png) |
 
+<br/>
+
 > 앱은 시스템 설정을 자동 감지하여 라이트 / 다크 테마로 전환됩니다.
 
 | ☀️ 라이트 모드 | 🌙 다크 모드 |
 |:---:|:---:|
 | ![라이트 모드](https://github.com/user-attachments/assets/ec05c5cf-64cf-49ac-8e77-b40e1cc9ba1e) | ![다크 모드](https://github.com/user-attachments/assets/0eae527c-f4b7-4aa1-896b-db2f5aed89a3) |
+
+<br/>
 
 ---
 
